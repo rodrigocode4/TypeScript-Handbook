@@ -273,7 +273,7 @@ let algunValor: any = "isso é uma string";
 let strTamanho: number = (<string>algunValor).length;
 ```
 
-And the other is the `as`-syntax:
+E a outra é a sintaxe `as`:
 
 ```ts
 let algunValor: any = "isso é uma string";
