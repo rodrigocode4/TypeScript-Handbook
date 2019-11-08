@@ -1,0 +1,34 @@
+<input type="checkbox" checked> Basic Types <br/>
+<input type="checkbox"> Variable Declarations (_current_ *@rodrigocode4*) <br/>
+<input type="checkbox"> Interfaces (_todo_) <br/>
+<input type="checkbox"> Classes (_todo_) <br/>
+<input type="checkbox"> Functions (_todo_) <br/>
+<input type="checkbox"> Generics (_todo_) <br/>
+<input type="checkbox"> Enums (_todo_) <br/>
+<input type="checkbox"> Type Inference (_todo_) <br/>
+<input type="checkbox"> Type Compatibility (_todo_) <br/>
+<input type="checkbox"> Advanced Types (_todo_) <br/>
+<input type="checkbox"> Symbols (_todo_) <br/>
+<input type="checkbox"> Iterators and Generators (_todo_) <br/>
+<input type="checkbox"> Modules (_todo_) <br/>
+<input type="checkbox"> Namespaces (_todo_) <br/>
+<input type="checkbox"> Namespaces and Modules (_todo_) <br/>
+<input type="checkbox"> Module Resolution (_todo_) <br/>
+<input type="checkbox"> Declaration Merging (_todo_) <br/>
+<input type="checkbox"> JSX (_todo_) <br/>
+<input type="checkbox"> Decorators (_todo_) <br/>
+<input type="checkbox"> Mixins (_todo_) <br/>
+<input type="checkbox"> Triple-Slash Directives (_todo_) <br/>
+<input type="checkbox"> Type Checking JavaScript Files (_todo_) <br/>
+<input type="checkbox"> Utility Types (_todo_) <br/>
+
+<input type="checkbox"> Compiler Options <br/>
+<input type="checkbox"> Project References <br/>
+<input type="checkbox"> Compiler Options in MSBuild <br/>
+<input type="checkbox"> Integrating with Build Tools <br/>
+<input type="checkbox"> Nightly Builds <br/>
+
+<input type="checkbox"> Configuring Watch <br/>
+<input type="checkbox"> JSDoc Supported Types <br/>
+<input type="checkbox"> Typings for NPM Packages <br/>
+<input type="checkbox"> Writing Declaration Files <br/>
