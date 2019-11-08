@@ -2,7 +2,7 @@
 
 Para que os programas sejam úteis, precisamos ser capazes de trabalhar com algumas das unidades mais simples de dados:  numbers, strings, structures, boolean e valores similares. No TypeScript, suportamos os mesmos tipos que você esperaria em JavaScript, com um tipo de enumeração conveniente para ajudar as coisas.
 
-# Boolean
+# Boolean (Booleano)
 
 O tipo de dados mais básico é o valor verdadeiro/falso simples, que JavaScript e TypeScript chamam de valor `boolean`.
 
@@ -10,7 +10,7 @@ O tipo de dados mais básico é o valor verdadeiro/falso simples, que JavaScript
 let estaFeito: boolean = false;
 ```
 
-# Number
+# Number (Número)
 
 Como no JavaScript, todos os números no TypeScript são valores de ponto flutuante. Esses números de ponto flutuante obtêm o tipo `number`. Além de literais hexadecimais e decimais, o TypeScript também suporta literais binários e octais, introduzidos no ECMAScript 2015.
 
@@ -50,7 +50,7 @@ let frase: string = "Olá,  nome é " + nomeCompleto + ".\n\n" +
     "Eu farei " + (idade + 1) + " anos no próximo mês.";
 ```
 
-# Array
+# Array (Matriz)
 
 O TypeScript, assim como o JavaScript, permite você trabalhar com matrizes(arrays) de valores.
 Os tipos de Array podem ser gravados de duas maneiras.
@@ -66,7 +66,7 @@ A segunda maneira usa o tipo genérico de Array, `Array<tipoDoElemento>`:
 let lista: Array<number> = [1, 2, 3];
 ```
 
-# Tuple
+# Tuple (Tupla)
 
 Tuple types allow you to express an array with a fixed number of elements whose types are known, but need not be the same. For example, you may want to represent a value as a pair of a `string` and a `number`:
 
@@ -96,10 +96,7 @@ x[3] = "world"; // Error, Property '3' does not exist on type '[string, number]'
 console.log(x[5].toString()); // Error, Property '5' does not exist on type '[string, number]'.
 ```
 
-# Enum
-
-A helpful addition to the standard set of datatypes from JavaScript is the `enum`.
-As in languages like C#, an enum is a way of giving more friendly names to sets of numeric values.
+# Enum (Enumerador)
 
 Uma adição útil ao conjunto padrão de tipos de dados do JavaScript é o `enum`.
 Como em linguagens como C#, uma enumeração(Enum) é uma maneira de atribuir nomes mais amigáveis para conjuntos de valores numéricos.
@@ -135,7 +132,7 @@ let nomeDaCor: string = Cor[2];
 console.log(nomeDaCor); // Exibe 'Verde', pois seu valor acima é 2
 ```
 
-# Any
+# Any (Qualquer)
 
 Podemos precisar descrever o tipo de variáveis que não sabemos, quando estamos escrevendo um aplicativo.
 Esses valores podem ser provenientes de conteúdo dinâmico, por exemplo, do usuário ou de uma biblioteca de terceiros.
@@ -170,7 +167,7 @@ let lista: any[] = [1, true, "grátis"];
 lista[1] = 100;
 ```
 
-# Void
+# Void (Vazio)
 
 `void` é um pouco como o oposto de `any`: a ausência de ter qualquer tipo.
 Você geralmente vê isso como o tipo de retorno de funções que não retornam um valor, ou que o retorno é vazio:
@@ -188,7 +185,7 @@ let inutil: void = undefined;
 inutil = null; // OK, se `--strictNullChecks` não estiver especificado
 ```
 
-# Null e Undefined
+# Null (Nulo) e Undefined (Indefinido)
 
 No TypeScript, `undefined` e` null` têm seus próprios tipos denominados `undefined` e` null` respectivamente.
 Assim como o `void`, eles não são extremamente úteis por si só:
@@ -210,7 +207,7 @@ Os tipos union é um tópico avançado que abordaremos em um capítulo posterior
 
 > Como observação: incentivamos o uso de `--strictNullChecks` quando possível, mas, para os propósitos deste handbook, assumiremos que ele está desativado.
 
-# Never
+# Never (Nunca)
 
 O tipo `never` representa o tipo de valores que nunca ocorrem.
 Por exemplo, `never` é o tipo de retorno para uma expressão de função, ou expressão de função de seta, que sempre gera uma exceção ou uma que nunca retorna;
@@ -239,7 +236,7 @@ function loopInfinito(): never {
 }
 ```
 
-# Object
+# Object (Objeto)
 
 `object` é um tipo que representa o tipo não primitivo, ou seja, qualquer coisa que não seja `number`, `string`,` boolean`, `symbol`,` null` ou `undefined`.
 
