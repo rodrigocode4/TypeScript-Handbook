@@ -11,3 +11,7 @@ Para uma descrição mais formal sobre a liguagem, consulte a [especificação m
 ## Como Contribuir
 
 O TypeScript-Handbook está aceitando contribuições. Se você enviou PR para uma issue existente, por favor, poste um comentário na issue para evitar duplicação e retrabalho. Veja nosso [arquivo de contribuição](/CONTRIBUTING.md) para mais informação - ele contém as diretrizes de como submeter um PR.
+
+## Contribua para a tradução
+
+[Click aqui para vez o estágio da tradução](./list_files.md)
