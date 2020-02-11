@@ -1,36 +1,35 @@
-# Variable Declarations
+# Declaração de variáveis
 
-`let` and `const` are two relatively new types of variable declarations in JavaScript.
-[As we mentioned earlier](./Basic%20Types.md#a-note-about-let), `let` is similar to `var` in some respects, but allows users to avoid some of the common "gotchas" that users run into in JavaScript.
-`const` is an augmentation of `let` in that it prevents re-assignment to a variable.
+`let` e `const` são dois tipos relativamente novos de declarações de variáveis em JavaScript. [Como mencionamos anteriormente](./Basic%20Types.md#a-note-about-let), `let` é semelhante ao `var` em alguns aspectos, mas permite que os usuários evitem algumas das “pegadinhas” comuns que os usuários encontram no JavaScript. `const` é um adjunto de `let` e que impede a reatribuição a uma variável.
 
-With TypeScript being a superset of JavaScript, the language naturally supports `let` and `const`.
-Here we'll elaborate more on these new declarations and why they're preferable to `var`.
+Com o TypeScript sendo um superconjunto de JavaScript, a linguagem naturalmente suporta `let` e `const`. 
+Aqui, elaboraremos mais sobre essas novas declarações e por que elas são preferíveis a `var`.
 
-If you've used JavaScript offhandedly, the next section might be a good way to refresh your memory.
-If you're intimately familiar with all the quirks of `var` declarations in JavaScript, you might find it easier to skip ahead.
+Se você usou o JavaScript de forma não autorizada, a próxima seção pode ser uma boa maneira de atualizar sua memória.
+Se você estiver intimamente familiarizado com todas as peculiaridades das declarações `var` no JavaScript, poderá achar mais fácil e seguir adiante.
 
-# `var` declarations
+# declaração `var`
 
 Declaring a variable in JavaScript has always traditionally been done with the `var` keyword.
+A declaração de uma variável em JavaScript é tradicionalmente feita com a palavra-chave `var`.
 
 ```ts
 var a = 10;
 ```
 
-As you might've figured out, we just declared a variable named `a` with the value `10`.
+Como você já deve ter percebido, acabamos de declarar uma variável chamada `a` com o valor` 10`.
 
-We can also declare a variable inside of a function:
+Também podemos declarar uma variável dentro de uma função:
 
 ```ts
 function f() {
-    var message = "Hello, world!";
+    var messagem = "Olá, Mundo!";
 
-    return message;
+    return messagem;
 }
 ```
 
-and we can also access those same variables within other functions:
+e também podemos acessar essas mesmas variáveis em outras funções:
 
 ```ts
 function f() {
@@ -45,9 +44,9 @@ var g = f();
 g(); // returns '11'
 ```
 
-In this above example, `g` captured the variable `a` declared in `f`.
-At any point that `g` gets called, the value of `a` will be tied to the value of `a` in `f`.
-Even if `g` is called once `f` is done running, it will be able to access and modify `a`.
+Neste exemplo acima, `g` capturou a variável `a` declarada em `f`.
+Em qualquer momento em que `g` for chamado, o valor de `a` será vinculado ao valor de `a` em `f`.
+Mesmo se `g` for chamado assim que o `f` terminar de rodar, ele poderá acessar e modificar o `a`.
 
 ```ts
 function f() {
@@ -67,10 +66,10 @@ function f() {
 f(); // returns '2'
 ```
 
-## Scoping rules
+## Regras de escopo
 
-`var` declarations have some odd scoping rules for those used to other languages.
-Take the following example:
+As exigências `var` têm algumas regras de escopo estranhas comparadas àquelas usadas em outras linguagens.
+Veja o seguinte exemplo:
 
 ```ts
 function f(shouldInitialize: boolean) {
@@ -85,35 +84,36 @@ f(true);  // returns '10'
 f(false); // returns 'undefined'
 ```
 
-Some readers might do a double-take at this example.
-The variable `x` was declared *within the `if` block*, and yet we were able to access it from outside that block.
-That's because `var` declarations are accessible anywhere within their containing function, module, namespace, or global scope - all which we'll go over later on - regardless of the containing block.
-Some people call this *`var`-scoping* or *function-scoping*.
-Parameters are also function scoped.
+Alguns leitores podem dar uma olhada neste exemplo.
+A variável `x` foi declarada *dentro do bloco `if`*, e ainda assim conseguimos acessá-la de fora desse bloco.
+Isso ocorre porque as declarações `var` estão acessíveis em qualquer lugar dentro de sua função, módulo, _namespace_ ou escopo global - todos sobre os quais falaremos mais adiante - independentemente do bloco que o contenha.
+Algumas pessoas chamam isso de *escopo-`var`* ou *escopo-de-função*.
+Os parâmetros também têm escopo de função.
 
-These scoping rules can cause several types of mistakes.
-One problem they exacerbate is the fact that it is not an error to declare the same variable multiple times:
+
+Essas regras de escopo podem causar vários tipos de erros.
+Um problema que eles exacerbam é o fato de não ser um erro declarar a mesma variável diversas vezes:
 
 ```ts
-function sumMatrix(matrix: number[][]) {
-    var sum = 0;
-    for (var i = 0; i < matrix.length; i++) {
-        var currentRow = matrix[i];
-        for (var i = 0; i < currentRow.length; i++) {
-            sum += currentRow[i];
+function sumarMatriz(matriz: number[][]) {
+    var soma = 0;
+    for (var i = 0; i < matriz.length; i++) {
+        var linhaAtual = matriz[i];
+        for (var i = 0; i < linhaAtual.length; i++) {
+            soma += linhaAtual[i];
         }
     }
 
-    return sum;
+    return soma;
 }
 ```
 
-Maybe it was easy to spot out for some, but the inner `for`-loop will accidentally overwrite the variable `i` because `i` refers to the same function-scoped variable.
-As experienced developers know by now, similar sorts of bugs slip through code reviews and can be an endless source of frustration.
+Talvez fosse fácil identificar alguns, mas o loop interno `for` substituirá acidentalmente a variável `i` porque `i` se refere à mesma variável com escopo de função.
+Como os desenvolvedores experientes sabem até agora, tipos semelhantes de bugs passam por revisões de código e podem ser uma fonte infinita de frustração.
 
-## Variable capturing quirks
+## Peculiaridades de capitura de variável
 
-Take a quick second to guess what the output of the following snippet is:
+Reserve um segundo rápido para adivinhar qual é a saída do seguinte snippet:
 
 ```ts
 for (var i = 0; i < 10; i++) {
@@ -121,9 +121,9 @@ for (var i = 0; i < 10; i++) {
 }
 ```
 
-For those unfamiliar, `setTimeout` will try to execute a function after a certain number of milliseconds (though waiting for anything else to stop running).
+Para quem não está familiarizado, o `setTimeout` tentará executar uma função após um certo número de milissegundos (apesar de esperar que qualquer outra coisa pare de executar).
 
-Ready? Take a look:
+Pronto? Dê uma olhada:
 
 ```text
 10
@@ -138,8 +138,8 @@ Ready? Take a look:
 10
 ```
 
-Many JavaScript developers are intimately familiar with this behavior, but if you're surprised, you're certainly not alone.
-Most people expect the output to be
+Muitos desenvolvedores de JavaScript estão intimamente familiarizados com esse comportamento, mas se você for surpreendido, certamente não estará sozinho.
+A maioria das pessoas espera que a saída seja
 
 ```text
 0
@@ -154,15 +154,15 @@ Most people expect the output to be
 9
 ```
 
-Remember what we mentioned earlier about variable capturing?
-Every function expression we pass to `setTimeout` actually refers to the same `i` from the same scope.
+Lembra do que mencionamos anteriormente sobre captura de variáveis?
+Toda expressão de função que passamos para `setTimeout` na verdade se refere ao mesmo `i` do mesmo escopo.
 
-Let's take a minute to consider what that means.
-`setTimeout` will run a function after some number of milliseconds, *but only* after the `for` loop has stopped executing;
-By the time the `for` loop has stopped executing, the value of `i` is `10`.
-So each time the given function gets called, it will print out `10`!
+Vamos levar um minuto para considerar o que isso significa.
+`setTimeout` executará uma função após um número de milissegundos, *mas somente* após o loop `for` parar de executar;
+No momento em que o loop `for` parou de executar, o valor de `i` é `10`.
+Portanto, toda vez que a função especificada for chamada, ela imprimirá `10`!
 
-A common work around is to use an IIFE - an Immediately Invoked Function Expression - to capture `i` at each iteration:
+Uma solução comum é usar um IIFE - uma expressão de função chamada imediatamente - para capturar `i` a cada iteração:
 
 ```ts
 for (var i = 0; i < 10; i++) {
@@ -174,24 +174,24 @@ for (var i = 0; i < 10; i++) {
 }
 ```
 
-This odd-looking pattern is actually pretty common.
-The `i` in the parameter list actually shadows the `i` declared in the `for` loop, but since we named them the same, we didn't have to modify the loop body too much.
+Esse padrão de aparência estranha é realmente bastante comum.
+O `i` na lista de parâmetros, na verdade, sombreia o `i` declarado no loop `for`, mas como os nomeamos da mesma forma, não precisamos modificar muito o corpo do loop.
 
-# `let` declarations
+# declaração do `let`
 
-By now you've figured out that `var` has some problems, which is precisely why `let` statements were introduced.
-Apart from the keyword used, `let` statements are written the same way `var` statements are.
+Até agora você descobriu que o `var` tem alguns problemas, e é exatamente por isso que as instruções `let` foram introduzidas.
+Além da palavra-chave usada, as instruções `let` são escritas da mesma maneira que as instruções `var`.
 
 ```ts
-let hello = "Hello!";
+let ola = "Olá!";
 ```
 
-The key difference is not in the syntax, but in the semantics, which we'll now dive into.
+A principal diferença não está na sintaxe, mas na semântica, na qual abordaremos agora.
 
-## Block-scoping
+## Escopo de bloco
 
-When a variable is declared using `let`, it uses what some call *lexical-scoping* or *block-scoping*.
-Unlike variables declared with `var` whose scopes leak out to their containing function, block-scoped variables are not visible outside of their nearest containing block or `for`-loop.
+Quando uma variável é declarada usando `let`, ela usa o que alguns chamam de *escopo lexical* ou *escopo de bloco*.
+Diferente das variáveis declaradas com `var`, cujos escopos vazam para a função que os contêm, as variáveis com escopo de bloco não são visíveis fora do bloco contendo mais próximo ou do loop `for`.
 
 ```ts
 function f(input: boolean) {
@@ -208,10 +208,10 @@ function f(input: boolean) {
 }
 ```
 
-Here, we have two local variables `a` and `b`.
-`a`'s scope is limited to the body of `f` while `b`'s scope is limited to the containing `if` statement's block.
+Aqui, temos duas variáveis locais `a` e `b`.
+O escopo de `a` é limitado ao corpo de `f` enquanto o escopo de `b` é limitado ao bloco de instrução `if` que contém.
 
-Variables declared in a `catch` clause also have similar scoping rules.
+Variáveis declaradas em uma cláusula `catch 'também possuem regras de escopo semelhantes.
 
 ```ts
 try {
@@ -225,18 +225,18 @@ catch (e) {
 console.log(e);
 ```
 
-Another property of block-scoped variables is that they can't be read or written to before they're actually declared.
-While these variables are "present" throughout their scope, all points up until their declaration are part of their *temporal dead zone*.
-This is just a sophisticated way of saying you can't access them before the `let` statement, and luckily TypeScript will let you know that.
+Outra propriedade das variáveis com escopo em bloco é que elas não podem ser lidas ou gravadas antes de serem realmente declaradas.
+Embora essas variáveis estejam "presentes" em todo o seu escopo, todos os pontos até sua declaração fazem parte de sua *zona morta temporal*.
+Esta é apenas uma maneira sofisticada de dizer que você não pode acessá-los antes da declaração `let`, e felizmente o TypeScript informará isso.
 
 ```ts
 a++; // illegal to use 'a' before it's declared;
 let a;
 ```
 
-Something to note is that you can still *capture* a block-scoped variable before it's declared.
-The only catch is that it's illegal to call that function before the declaration.
-If targeting ES2015, a modern runtime will throw an error; however, right now TypeScript is permissive and won't report this as an error.
+Algo a ser observado é que você ainda pode *capturar* uma variável com escopo de bloco antes de ser declarada.
+O único problema é que é ilegal chamar essa função antes da declaração.
+Se estiver direcionado ao ES2015, um moderno _runtime_ gerará um erro; no entanto, no momento, o TypeScript é permissivo e não relatará isso como um erro.
 
 ```ts
 function foo() {
@@ -251,11 +251,11 @@ foo();
 let a;
 ```
 
-For more information on temporal dead zones, see relevant content on the [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_dead_zone_and_errors_with_let).
+Para mais informações sobre zonas mortas temporais, consulte o conteúdo relevante na [Mozilla Developer Network](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Statements/let#Temporal_dead_zone_and_errors_with_let).
 
-## Re-declarations and Shadowing
+## Re-declarações e Sombreamento(Shadowing)
 
-With `var` declarations, we mentioned that it didn't matter how many times you declared your variables; you just got one.
+Com declarações `var`, mencionamos que não importava quantas vezes você declarou suas variáveis; você acabou de pegar um.
 
 ```ts
 function f(x) {
@@ -268,16 +268,16 @@ function f(x) {
 }
 ```
 
-In the above example, all declarations of `x` actually refer to the *same* `x`, and this is perfectly valid.
-This often ends up being a source of bugs.
-Thankfully, `let` declarations are not as forgiving.
+No exemplo acima, todas as declarações de `x` realmente se referem ao *mesmo* `x`, e isso é perfeitamente válido.
+Isso geralmente acaba sendo uma fonte de bugs.
+Felizmente, as declarações `let` não são tão perdoadoras.
 
 ```ts
 let x = 10;
 let x = 20; // error: can't re-declare 'x' in the same scope
 ```
 
-The variables don't necessarily need to both be block-scoped for TypeScript to tell us that there's a problem.
+As variáveis não precisam necessariamente ter um escopo de bloco para o TypeScript nos dizer que há um problema.
 
 ```ts
 function f(x) {
@@ -290,12 +290,12 @@ function g() {
 }
 ```
 
-That's not to say that block-scoped variable can never be declared with a function-scoped variable.
-The block-scoped variable just needs to be declared within a distinctly different block.
+Isso não quer dizer que a variável com escopo de bloco nunca possa ser declarada com uma variável com escopo de função.
+A variável com escopo de bloco só precisa ser declarada dentro de um bloco distintamente diferente.
 
 ```ts
-function f(condition, x) {
-    if (condition) {
+function f(condicao, x) {
+    if (condicao) {
         let x = 100;
         return x;
     }
@@ -307,59 +307,58 @@ f(false, 0); // returns '0'
 f(true, 0);  // returns '100'
 ```
 
-The act of introducing a new name in a more nested scope is called *shadowing*.
-It is a bit of a double-edged sword in that it can introduce certain bugs on its own in the event of accidental shadowing, while also preventing certain bugs.
-For instance, imagine we had written our earlier `sumMatrix` function using `let` variables.
+O ato de introduzir um novo nome em um escopo mais aninhado é chamado *sobreamento*(_shadowing_).
+Isso é um pouco de uma faca de dois gumes, pois pode introduzir certos bugs por conta própria em caso de sombreamento acidental, além de impedir certos bugs.
+Por exemplo, imagine que tivéssemos escrito nossa função `somaMatriz` anterior usando variáveis `let`.
 
 ```ts
-function sumMatrix(matrix: number[][]) {
-    let sum = 0;
-    for (let i = 0; i < matrix.length; i++) {
-        var currentRow = matrix[i];
-        for (let i = 0; i < currentRow.length; i++) {
-            sum += currentRow[i];
+function sumaMatriz(matriz: number[][]) {
+    let soma = 0;
+    for (let i = 0; i < matriz.length; i++) {
+        var linhaAtual = matriz[i];
+        for (let i = 0; i < linhaAtual.length; i++) {
+            soma += linhaAtual[i];
         }
     }
 
-    return sum;
+    return soma;
 }
 ```
 
-This version of the loop will actually perform the summation correctly because the inner loop's `i` shadows `i` from the outer loop.
+Esta versão do loop realmente executará a soma corretamente, porque o `i` do loop interno sombreia o `i` do loop externo.
+O sombreamento(_shadowing_) *normalmente* deve ser evitado no interesse de escrever um código mais claro.
+Embora existam alguns cenários em que possa ser adequado tirar proveito disso, você deve usar seu bom senso.
 
-Shadowing should *usually* be avoided in the interest of writing clearer code.
-While there are some scenarios where it may be fitting to take advantage of it, you should use your best judgement.
+## Capitura de variável em escopo de bloco
 
-## Block-scoped variable capturing
-
-When we first touched on the idea of variable capturing with `var` declaration, we briefly went into how variables act once captured.
-To give a better intuition of this, each time a scope is run, it creates an "environment" of variables.
-That environment and its captured variables can exist even after everything within its scope has finished executing.
+Quando tocamos pela primeira vez na ideia de captura de variáveis com a declaração `var`, analisamos brevemente como as variáveis agem uma vez capturadas.
+Para dar uma melhor intuição disso, sempre que um escopo é executado, ele cria um "ambiente" de variáveis.
+Esse ambiente e suas variáveis capturadas podem existir mesmo após a conclusão de tudo dentro de seu escopo.
 
 ```ts
-function theCityThatAlwaysSleeps() {
-    let getCity;
+function aCidadeQueSempreDorme() {
+    let getCidade;
 
     if (true) {
-        let city = "Seattle";
-        getCity = function() {
-            return city;
+        let cidade = "Seattle";
+        getCidade = function() {
+            return cidade;
         }
     }
 
-    return getCity();
+    return getCidade();
 }
 ```
 
-Because we've captured `city` from within its environment, we're still able to access it despite the fact that the `if` block finished executing.
+Como capturamos `cidade` de dentro de seu ambiente, ainda podemos acessá-lo, apesar do bloco `if` ter terminado de executar.
 
-Recall that with our earlier `setTimeout` example, we ended up needing to use an IIFE to capture the state of a variable for every iteration of the `for` loop.
-In effect, what we were doing was creating a new variable environment for our captured variables.
-That was a bit of a pain, but luckily, you'll never have to do that again in TypeScript.
+Lembre-se de que, com o exemplo anterior `setTimeout`, acabamos precisando usar um IIFE para capturar o estado de uma variável para cada iteração do loop `for`.
+Com efeito, o que estávamos fazendo era criar uma nova variável de ambiente para os nossos variáveis capturadas.
+Isso foi um pouco trabalhoso, mas, felizmente, você nunca precisará fazer isso novamente no TypeScript.
 
-`let` declarations have drastically different behavior when declared as part of a loop.
-Rather than just introducing a new environment to the loop itself, these declarations sort of create a new scope *per iteration*.
-Since this is what we were doing anyway with our IIFE, we can change our old `setTimeout` example to just use a `let` declaration.
+As declarações `let 'têm comportamento drasticamente diferente quando declaradas como parte de um loop.
+Em vez de apenas introduzir um novo ambiente no próprio loop, essas declarações meio que criam um novo escopo *por iteração*.
+Como isso é o que estávamos fazendo de qualquer maneira com nosso IIFE, podemos mudar nosso antigo exemplo `setTimeout` para usar apenas uma declaração `let`.
 
 ```ts
 for (let i = 0; i < 10 ; i++) {
@@ -367,7 +366,7 @@ for (let i = 0; i < 10 ; i++) {
 }
 ```
 
-and as expected, this will print out
+e como esperado, isso será impresso
 
 ```text
 0
